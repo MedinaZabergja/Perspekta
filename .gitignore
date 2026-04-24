@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.playwright-cli/
+output/
+supabase/.temp/
+.codex-dev.log
+.codex-dev.err.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
