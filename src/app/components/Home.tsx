@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
 import AppleMascot from './AppleMascot';
+import type { StoredUser } from '../identity';
 
 interface HomeProps {
+  user: StoredUser | null;
   onStartReflection: () => void;
   onViewHistory: () => void;
   onOpenFearJar: () => void;
@@ -9,9 +11,11 @@ interface HomeProps {
   isReflectionLocked?: boolean;
   reflectionCountdown?: string | null;
   canReturnToReflectionMode?: boolean;
+  onOpenAuth: () => void;
 }
 
 export default function Home({
+  user,
   onStartReflection,
   onViewHistory,
   onOpenFearJar,
@@ -19,6 +23,7 @@ export default function Home({
   isReflectionLocked = false,
   reflectionCountdown = null,
   canReturnToReflectionMode = false,
+  onOpenAuth,
 }: HomeProps) {
   return (
     <div className="min-h-full px-4 py-8 sm:px-6 sm:py-10">
@@ -76,6 +81,20 @@ export default function Home({
                 </div>
               </div>
             </motion.button>
+
+            {!user && (
+              <motion.button
+                className="w-full px-8 py-4 bg-[#F1C6D9] text-white rounded-3xl hover:bg-[#e5b0c7] transition-all shadow-sm"
+                onClick={onOpenAuth}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-xl">🔐</span>
+                  <span>Sign In / Create Account</span>
+                </div>
+              </motion.button>
+            )}
 
             {canReturnToReflectionMode && onReturnToReflectionMode && (
               <motion.button

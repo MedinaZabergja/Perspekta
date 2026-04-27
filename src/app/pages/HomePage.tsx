@@ -3,19 +3,36 @@ import { useAppState } from '../hooks/useAppState';
 import { getTimeRemaining, isInReflectionMode } from '../storage';
 import Home from '../components/Home';
 import ReflectionMode from '../components/ReflectionMode';
+import AuthModal from '../components/AuthModal';
+import { auth } from '../auth';
+import type { StoredUser } from '../identity';
 import { ActivityCompletion } from '../types';
 import { useEffect, useState } from 'react';
 
 export default function HomePage() {
   const { state, setState } = useAppState();
   const navigate = useNavigate();
+
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [user, setUser] = useState<StoredUser | null>(auth.getCachedUser());
+
   const isReflectionLocked =
     state.reflectionModeUntil !== null && isInReflectionMode(state.reflectionModeUntil);
+
   const [countdown, setCountdown] = useState(
     state.reflectionModeUntil ? getTimeRemaining(state.reflectionModeUntil) : null
   );
 
-  // Check if reflection mode has expired
+  useEffect(() => {
+    auth.getCurrentUser().then(setUser);
+
+    const unsubscribe = auth.onAuthStateChange((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return unsubscribe;
+  }, []);
+
   useEffect(() => {
     if (state.reflectionModeUntil && !isInReflectionMode(state.reflectionModeUntil)) {
       setState((prev) => {
@@ -45,9 +62,7 @@ export default function HomePage() {
   }, [state.reflectionModeUntil]);
 
   const handleStartReflection = () => {
-    if (isReflectionLocked) {
-      return;
-    }
+    if (isReflectionLocked) return;
 
     setState((prev) => {
       if (!prev) return prev;
@@ -59,6 +74,7 @@ export default function HomePage() {
         },
       };
     });
+
     navigate('/reflect');
   };
 
@@ -101,9 +117,7 @@ export default function HomePage() {
   };
 
   const handleReturnToReflectionMode = () => {
-    if (!isReflectionLocked) {
-      return;
-    }
+    if (!isReflectionLocked) return;
 
     setState((prev) => {
       if (!prev) return prev;
@@ -116,25 +130,53 @@ export default function HomePage() {
 
   if (isReflectionLocked && !state.reflectionModeDismissed) {
     return (
-      <ReflectionMode
-        reflectionModeUntil={state.reflectionModeUntil}
-        onViewHistory={handleViewHistory}
-        onFinishEarly={handleFinishReflectionEarly}
-        onCompleteActivity={handleCompleteActivity}
-        completedActivities={state.completedActivities || []}
-      />
+      <>
+        <ReflectionMode
+          reflectionModeUntil={state.reflectionModeUntil!}
+          onViewHistory={handleViewHistory}
+          onFinishEarly={handleFinishReflectionEarly}
+          onCompleteActivity={handleCompleteActivity}
+          completedActivities={state.completedActivities || []}
+        />
+
+        <AuthModal
+          isOpen={isAuthOpen}
+          onClose={() => setIsAuthOpen(false)}
+          onSignIn={async (email, password) => {
+            await auth.signIn(email, password);
+          }}
+          onSignUp={async (email, password, name) => {
+            await auth.signUp(email, password, name);
+          }}
+        />
+      </>
     );
   }
 
   return (
-    <Home
-      onStartReflection={handleStartReflection}
-      onViewHistory={handleViewHistory}
-      onOpenFearJar={handleOpenFearJar}
-      isReflectionLocked={isReflectionLocked}
-      reflectionCountdown={countdown}
-      canReturnToReflectionMode={isReflectionLocked && state.reflectionModeDismissed}
-      onReturnToReflectionMode={handleReturnToReflectionMode}
-    />
+    <>
+      <Home
+        user={user}
+        onStartReflection={handleStartReflection}
+        onViewHistory={handleViewHistory}
+        onOpenFearJar={handleOpenFearJar}
+        isReflectionLocked={isReflectionLocked}
+        reflectionCountdown={countdown}
+        canReturnToReflectionMode={isReflectionLocked && state.reflectionModeDismissed}
+        onReturnToReflectionMode={handleReturnToReflectionMode}
+        onOpenAuth={() => setIsAuthOpen(true)}
+      />
+
+      <AuthModal
+        isOpen={isAuthOpen}
+        onClose={() => setIsAuthOpen(false)}
+        onSignIn={async (email, password) => {
+          await auth.signIn(email, password);
+        }}
+        onSignUp={async (email, password, name) => {
+          await auth.signUp(email, password, name);
+        }}
+      />
+    </>
   );
 }

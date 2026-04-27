@@ -1,4 +1,4 @@
-import { projectId, publicAnonKey } from '/utils/supabase/info';
+import { projectId, publicAnonKey } from '../../utils/supabase/info';
 import type { Session, User } from '@supabase/supabase-js';
 import { clearStoredUser, getStoredUser, setStoredUser, StoredUser } from './identity';
 import { supabase } from './supabase';
@@ -72,15 +72,19 @@ const getSession = async (): Promise<Session | null> => {
 };
 
 export const auth = {
-  async signUp(email: string, password: string, name: string): Promise<void> {
+  async signUp(email: string, password: string, name: string): Promise<StoredUser> {
     const normalizedEmail = normalizeEmail(email);
+
+    // Create user (server function)
     await request('/auth/signup', { email: normalizedEmail, password, name });
 
-    await this.signIn(normalizedEmail, password);
+    // Auto login after signup
+    return await this.signIn(normalizedEmail, password);
   },
 
-  async signIn(email: string, password: string): Promise<void> {
+  async signIn(email: string, password: string): Promise<StoredUser> {
     const normalizedEmail = normalizeEmail(email);
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email: normalizedEmail,
       password,
@@ -91,15 +95,19 @@ export const auth = {
     }
 
     const storedUser = syncStoredUser(data.session);
+
     if (!storedUser) {
       throw new Error('Could not start a signed-in session');
     }
 
+    return storedUser; // ✅ RETURN USER (important)
   },
 
   async signOut(): Promise<void> {
     const { error } = await supabase.auth.signOut();
+
     syncStoredUser(null);
+
     if (error) {
       throw new Error(error.message);
     }
