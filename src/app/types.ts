@@ -10,7 +10,7 @@ export interface ThoughtEntry {
 export interface FearEntry {
   id: string;
   fear: string;
-  counterArgument: string;
+  counterArgument?: string;   // ← changed from required to optional
   createdAt: number;
 }
 

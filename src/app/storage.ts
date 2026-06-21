@@ -26,6 +26,15 @@ const getLocalState = (): AppState => {
 
     if (stored) {
       const parsed = JSON.parse(stored);
+
+      // Migration: strip counterArgument from fearJar entries
+      if (parsed.fearJar && Array.isArray(parsed.fearJar)) {
+        parsed.fearJar = parsed.fearJar.map((entry: any) => {
+          const { counterArgument, ...cleanEntry } = entry;
+          return cleanEntry;
+        });
+      }
+
       // Merge with default state to ensure all fields exist
       const normalizedState = {
         ...defaultState,

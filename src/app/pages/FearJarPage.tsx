@@ -7,15 +7,15 @@ export default function FearJarPage() {
   const { state, setState } = useAppState();
   const navigate = useNavigate();
 
-  const handleAddFear = (fear: string, counterArgument: string) => {
+  const handleAddFear = (fear: string) => {   // ← removed second param
     const newFear: FearEntry = {
       id: Date.now().toString(),
       fear,
-      counterArgument,
       createdAt: Date.now(),
+      // counterArgument removed
     };
 
-    setState((prev) => {
+   setState((prev) => {
       if (!prev) return prev;
       return {
         ...prev,
@@ -23,7 +23,6 @@ export default function FearJarPage() {
       };
     });
   };
-
   const handleRemoveFear = (id: string) => {
     setState((prev) => {
       if (!prev) return prev;

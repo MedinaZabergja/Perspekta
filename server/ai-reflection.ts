@@ -11,11 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 const FREE_MODELS = [
-  'deepseek/deepseek-v4-flash:free',
-  'meta-llama/llama-3.3-70b-instruct:free',
   'google/gemma-4-31b-it:free',
-  'nvidia/nemotron-3-nano-30b-a3b:free',
-  'openrouter/free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'deepseek/deepseek-v4-flash:free',
 ];
 
 app.get('/api/ai-reflection', (_req, res) => {
@@ -64,7 +62,7 @@ ${evidence.join(', ') || 'their own observations'}
 Their balanced perspective:
 "${balancedPerspective}"
 
-Write 6-8 short sentences directly to the user using "you."
+Write exactly 6 short sentences directly to the user using "you."
 
 Structure:
 1. Briefly name and validate the emotion.
@@ -91,8 +89,13 @@ Avoid:
 - Medical or therapy claims.
 - Emojis.
 - Exclamation marks.
+- Code.
+- HTML.
+- JSON.
+- Random symbols.
+- Non-English text unless the user wrote in that language.
 
-Keep it clear, gentle, and grounded.`;
+Return only the final reflection. Do not include labels, markdown, notes, explanations, or formatting.`;
 
   let lastError: any = null;
 
@@ -111,9 +114,9 @@ Keep it clear, gentle, and grounded.`;
         body: JSON.stringify({
           model,
           messages: [{ role: 'user', content: prompt }],
-          max_tokens: 260,
-          temperature: 0.45,
-          top_p: 0.85,
+          max_tokens: 220,
+          temperature: 0.3,
+          top_p: 0.8,
         }),
       });
 
@@ -129,27 +132,7 @@ Keep it clear, gentle, and grounded.`;
       let rawText = data?.choices?.[0]?.message?.content?.trim() || '';
       console.log(`Raw output from ${model}:`, rawText);
 
-      const garbagePatterns = [
-        /everything will be fine/gi,
-        /you are perfect/gi,
-        /you are enough/gi,
-        /just be positive/gi,
-        /toxic positivity/gi,
-        /as a therapist/gi,
-        /i am a therapist/gi,
-        /diagnosis/gi,
-        /structure:/gi,
-        /tone:/gi,
-        /avoid:/gi,
-        /write 6-8/gi,
-        /user's difficult thought/gi,
-        /evidence the user provided/gi,
-        /their balanced perspective/gi,
-      ];
-
-      garbagePatterns.forEach((pattern) => {
-        rawText = rawText.replace(pattern, '');
-      });
+      rawText = cleanAIText(rawText);
 
       const sentenceMatches = rawText.match(/[^.!?]+[.!?]+/g);
       let sentences: string[] = [];
@@ -158,35 +141,41 @@ Keep it clear, gentle, and grounded.`;
         sentences = sentenceMatches
           .map((s: string) => s.trim())
           .filter((s: string) => s.length > 15)
-          .slice(0, 8);
+          .slice(0, 6);
       } else {
         sentences = rawText
           .split(/\n+/)
           .map((s: string) => s.trim())
           .filter((s: string) => s.length > 15)
-          .slice(0, 8);
+          .slice(0, 6);
       }
 
-      const fallbacks = generateSmartFallbacks(thought, evidence, balancedPerspective);
-
-      while (sentences.length < 6) {
-        sentences.push(fallbacks[sentences.length] || fallbacks[fallbacks.length - 1]);
-      }
-
-      sentences = sentences.map((s) => {
-        return s
+      sentences = sentences.map((s) =>
+        s
           .replace(/^[^a-zA-Z]+/, '')
           .replace(/\s+/g, ' ')
           .replace(/!/g, '.')
-          .trim();
-      });
+          .trim()
+      );
 
       sentences = sentences.map((s) => {
         if (!s.match(/[.!?]$/)) return s + '.';
         return s;
       });
 
-      const formattedReflection = sentences.join(' ');
+      let formattedReflection = sentences.join(' ');
+
+      if (isCorruptedOutput(formattedReflection)) {
+        console.log('Corrupted AI output detected. Trying next model.');
+        lastError = { model, error: 'Corrupted AI output' };
+        continue;
+      }
+
+      while (sentences.length < 6) {
+        const fallbacks = generateSmartFallbacks(thought, evidence, balancedPerspective);
+        sentences.push(fallbacks[sentences.length] || fallbacks[fallbacks.length - 1]);
+        formattedReflection = sentences.join(' ');
+      }
 
       console.log('Formatted reflection:', formattedReflection);
 
@@ -212,9 +201,78 @@ Keep it clear, gentle, and grounded.`;
   return res.json({
     aiReflection: fallbackReflection,
     modelUsed: 'fallback',
-    warning: 'AI models unavailable. Using generated reflection.',
+    warning: 'AI models unavailable or returned corrupted output. Using generated reflection.',
   });
 });
+
+function cleanAIText(text: string): string {
+  return text
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/[*#_`~]/g, '')
+    .replace(/\{[\s\S]*?\}/g, '')
+    .replace(/\[[\s\S]*?\]/g, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/everything will be fine/gi, '')
+    .replace(/you are perfect/gi, '')
+    .replace(/you are enough/gi, '')
+    .replace(/just be positive/gi, '')
+    .replace(/as a therapist/gi, '')
+    .replace(/i am a therapist/gi, '')
+    .replace(/diagnosis/gi, '')
+    .replace(/structure:/gi, '')
+    .replace(/tone:/gi, '')
+    .replace(/avoid:/gi, '')
+    .replace(/write exactly/gi, '')
+    .replace(/user's difficult thought/gi, '')
+    .replace(/evidence the user provided/gi, '')
+    .replace(/their balanced perspective/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function isCorruptedOutput(text: string): boolean {
+  const corruptionIndicators = [
+    'import ',
+    'export ',
+    'package ',
+    'const ',
+    'let ',
+    'function ',
+    'DOCTYPE',
+    'html>',
+    'JSON',
+    'HTTP',
+    'shell',
+    'Observer',
+    'System.',
+    'message:',
+    'error:',
+    'npm',
+    'node_modules',
+    'undefined',
+    'null',
+    '中国',
+    '操作方法',
+    '完整',
+    '預定',
+    '语句',
+    '原理',
+    '#',
+    '$',
+    '<',
+    '>',
+    '{',
+    '}',
+    '[',
+    ']',
+  ];
+
+  if (!text || text.length < 80) return true;
+
+  return corruptionIndicators.some((term) =>
+    text.toLowerCase().includes(term.toLowerCase())
+  );
+}
 
 function generateSmartFallbacks(
   thought: string,
@@ -253,10 +311,10 @@ function generateSmartFallbacks(
 
   if (isNotGoodEnough) {
     return [
-      'You seem to be feeling discouraged and unsure of yourself right now.',
-      'That feeling matters, but it is not the same as proof that you are not good enough.',
+      'You seem discouraged and unsure of yourself right now.',
+      'That feeling matters, but it is not proof that you are not good enough.',
       `The evidence you gave points to a more balanced view: ${evidenceText}.`,
-      'A hard moment can make your mind ignore the parts that show effort, progress, or ability.',
+      'A hard moment can make your mind ignore signs of effort, progress, or ability.',
       'A more realistic thought is that you are struggling with something specific, not failing as a person.',
       'Today, write down one thing you handled adequately and one thing you can improve next.',
     ];
@@ -265,9 +323,9 @@ function generateSmartFallbacks(
   if (isAlwaysNever) {
     return [
       'You seem overwhelmed, and your mind is using very absolute language.',
-      'Words like always, never, everyone, and no one usually make a situation sound more final than it really is.',
+      'Words like always, never, everyone, and no one can make a situation sound more final than it is.',
       `Your own evidence gives the situation more nuance: ${evidenceText}.`,
-      'That means the thought may contain some emotion, but it is not fully accurate.',
+      'That means the thought may contain real emotion, but it is not fully accurate.',
       'A more balanced view is that this situation is difficult, but not completely fixed or hopeless.',
       'Today, find one exception to the absolute thought and write it down clearly.',
     ];

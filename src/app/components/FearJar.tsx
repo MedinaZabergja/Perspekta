@@ -8,17 +8,10 @@ import FoldingNote from './FoldingNote';
 
 interface FearJarProps {
   fears: FearEntry[];
-  onAddFear: (fear: string, counterArgument: string) => void;
+  onAddFear: (fear: string) => void;   // ← single param
   onRemoveFear: (id: string) => void;
   onBack: () => void;
 }
-
-const counterArgumentTips = [
-  'Focus on observable facts instead of the loudest feeling.',
-  'Look for past evidence that contradicts the worry.',
-  'Write what you would tell a close friend with this fear.',
-  'Validate the fear, then question whether it is accurate.',
-];
 
 const formatFearDate = (createdAt: number) => {
   if (!createdAt) return 'Saved recently';
@@ -32,32 +25,27 @@ const formatFearDate = (createdAt: number) => {
 export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: FearJarProps) {
   const [isAdding, setIsAdding] = useState(false);
   const [newFear, setNewFear] = useState('');
-  const [counterArgument, setCounterArgument] = useState('');
   const [expandedFear, setExpandedFear] = useState<string | null>(null);
   const [showAnimation, setShowAnimation] = useState(false);
   const [animatingFear, setAnimatingFear] = useState('');
-  const [animatingCounter, setAnimatingCounter] = useState('');
   const [showList, setShowList] = useState(false);
 
-  const canSubmit = Boolean(newFear.trim() && counterArgument.trim());
+  const canSubmit = Boolean(newFear.trim());
   const latestFear = fears[fears.length - 1];
 
   const handleSubmit = () => {
     if (!canSubmit) return;
 
     setAnimatingFear(newFear.trim());
-    setAnimatingCounter(counterArgument.trim());
     setShowAnimation(true);
     setIsAdding(false);
     setNewFear('');
-    setCounterArgument('');
   };
 
   const handleAnimationComplete = () => {
-    if (animatingFear && animatingCounter) {
-      onAddFear(animatingFear, animatingCounter);
+    if (animatingFear) {
+      onAddFear(animatingFear);
       setAnimatingFear('');
-      setAnimatingCounter('');
     }
 
     setShowAnimation(false);
@@ -82,10 +70,10 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
             <ArrowLeft className="h-5 w-5" />
           </motion.button>
           <div className="min-w-0 flex-1">
-            <p className="mb-1 text-xs uppercase tracking-[0.28em] text-[#B5A4AC]">gentle evidence bank</p>
+            <p className="mb-1 text-xs uppercase tracking-[0.28em] text-[#B5A4AC]">gentle storage</p>
             <h1 className="text-3xl text-[#3d3244] sm:text-4xl">Fear Jar</h1>
             <p className="mt-1 max-w-xl text-[#A994A1]">
-              Fold worries away after pairing them with grounded counter-evidence.
+              Fold worries away and store them gently.
             </p>
           </div>
           <AppleMascot emotion={showAnimation ? 'writing' : 'encouraging'} size="sm" className="hidden sm:flex" />
@@ -106,7 +94,7 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                 <p className="text-sm font-medium text-[#3d3244]">Your sealed jar</p>
                 <p className="text-sm text-[#A994A1]">
                   {fears.length > 0
-                    ? `${fears.length} ${fears.length === 1 ? 'fear is' : 'fears are'} stored with counter-evidence.`
+                    ? `${fears.length} ${fears.length === 1 ? 'fear is' : 'fears are'} stored.`
                     : 'Empty and ready for the first folded note.'}
                 </p>
               </div>
@@ -150,22 +138,10 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                 <div>
                   <h2 className="text-xl text-[#3d3244]">Make the worry smaller</h2>
                   <p className="mt-2 text-sm leading-relaxed text-[#A994A1]">
-                    Name the fear, then immediately add a logical counter-argument. The point is not to erase
-                    the feeling. It is to store evidence that the fear is not the whole story.
+                    Name the fear and fold it away. The act of writing it down and sealing it in the jar
+                    is often enough to loosen its grip.
                   </p>
                 </div>
-              </div>
-
-              <div className="rounded-3xl bg-[#EEF8EE]/80 p-4">
-                <p className="text-sm font-medium text-[#3d3244]">A strong counter-argument should:</p>
-                <ul className="mt-3 space-y-2">
-                  {counterArgumentTips.map((tip) => (
-                    <li key={tip} className="flex gap-3 text-sm leading-relaxed text-[#8F7E89]">
-                      <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#C3D162]" />
-                      <span>{tip}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </motion.div>
 
@@ -203,7 +179,6 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                       onClick={() => {
                         setIsAdding(false);
                         setNewFear('');
-                        setCounterArgument('');
                       }}
                       aria-label="Close new fear entry form"
                       className="grid h-10 w-10 place-items-center rounded-full bg-[#F8E4ED] text-[#A994A1] transition-colors hover:text-[#D994B2]"
@@ -212,28 +187,16 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                     </button>
                   </div>
 
-                  <div className="space-y-4">
-                    <label className="block space-y-2">
-                      <span className="text-sm font-medium text-[#3d3244]">What fear is asking for attention?</span>
-                      <textarea
-                        value={newFear}
-                        onChange={(event) => setNewFear(event.target.value)}
-                        placeholder="Example: I am afraid I will fail my exam."
-                        className="h-24 w-full resize-none rounded-3xl border border-[#F1C6D9]/45 bg-white px-5 py-4 text-[#3d3244] outline-none transition-colors placeholder:text-[#B5A4AC]/55 focus:border-[#D994B2]"
-                        autoFocus
-                      />
-                    </label>
-
-                    <label className="block space-y-2">
-                      <span className="text-sm font-medium text-[#3d3244]">What evidence can answer it?</span>
-                      <textarea
-                        value={counterArgument}
-                        onChange={(event) => setCounterArgument(event.target.value)}
-                        placeholder="Example: I studied, I passed similar exams before, and one exam will not define me."
-                        className="h-32 w-full resize-none rounded-3xl border border-[#F1C6D9]/45 bg-white px-5 py-4 text-[#3d3244] outline-none transition-colors placeholder:text-[#B5A4AC]/55 focus:border-[#D994B2]"
-                      />
-                    </label>
-                  </div>
+                  <label className="block space-y-2">
+                    <span className="text-sm font-medium text-[#3d3244]">What fear is asking for attention?</span>
+                    <textarea
+                      value={newFear}
+                      onChange={(event) => setNewFear(event.target.value)}
+                      placeholder="Example: I am afraid I will fail my exam."
+                      className="h-32 w-full resize-none rounded-3xl border border-[#F1C6D9]/45 bg-white px-5 py-4 text-[#3d3244] outline-none transition-colors placeholder:text-[#B5A4AC]/55 focus:border-[#D994B2]"
+                      autoFocus
+                    />
+                  </label>
 
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                     <motion.button
@@ -241,7 +204,6 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                       onClick={() => {
                         setIsAdding(false);
                         setNewFear('');
-                        setCounterArgument('');
                       }}
                       whileHover={{ scale: 1.015 }}
                       whileTap={{ scale: 0.98 }}
@@ -289,7 +251,7 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.26, duration: 0.4 }}
                 >
-                  Your jar is empty. Add one fear and pair it with a grounded answer.
+                  Your jar is empty. Add a fear and fold it away gently.
                 </motion.div>
               )
             )}
@@ -312,9 +274,6 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                     {fears.length} saved {fears.length === 1 ? 'note' : 'notes'}
                   </h2>
                 </div>
-                <p className="max-w-sm text-sm text-[#A994A1]">
-                  Open a note to read the counter-evidence you saved with it.
-                </p>
               </div>
 
               <div className="grid gap-4 md:grid-cols-2">
@@ -335,7 +294,7 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                           className="min-w-0 flex-1 text-left"
                         >
                           <p className="text-sm text-[#B5A4AC]">{formatFearDate(fear.createdAt)}</p>
-                          <p className="mt-2 line-clamp-3 font-medium leading-relaxed text-[#3d3244]">{fear.fear}</p>
+                          <p className="mt-2 font-medium leading-relaxed text-[#3d3244]">{fear.fear}</p>
                         </button>
                         <button
                           onClick={() => onRemoveFear(fear.id)}
@@ -345,24 +304,6 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                           <X className="h-4 w-4" />
                         </button>
                       </div>
-
-                      <AnimatePresence>
-                        {isExpanded && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.28 }}
-                          >
-                            <div className="mt-5 border-t border-[#F1C6D9]/24 pt-4">
-                              <p className="text-sm font-medium text-[#3d3244]">Counter-evidence</p>
-                              <div className="mt-3 rounded-3xl bg-gradient-to-br from-[#EEF8EE] to-[#E8F7F5] p-4">
-                                <p className="text-sm leading-relaxed text-[#5B4D57]">{fear.counterArgument}</p>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
                     </motion.article>
                   );
                 })}
