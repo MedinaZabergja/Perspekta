@@ -71,8 +71,8 @@ export default function AppleMascot({
             <stop offset="100%" stopColor="#E890B9" stopOpacity="0" />
           </radialGradient>
           <linearGradient id={leafGradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#DCEB70" />
-            <stop offset="100%" stopColor="#8DBA4E" />
+            <stop offset="0%" stopColor="#A7AA72" />
+            <stop offset="100%" stopColor="#787B50" />
           </linearGradient>
           <radialGradient id={shadowGradientId} cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#987D8C" stopOpacity="0.26" />
@@ -89,19 +89,19 @@ export default function AppleMascot({
           <path
             d="M39 88 C35 99 34 110 40 118"
             fill="none"
-            stroke="#E3A4C0"
+            stroke="#B85D73"
             strokeWidth="8"
             strokeLinecap="round"
           />
-          <ellipse cx="41" cy="120" rx="8" ry="5" fill="#CF8DAA" opacity="0.95" />
+          <ellipse cx="41" cy="120" rx="8" ry="5" fill="#CF6F85" opacity="0.95" />
           <path
             d="M81 88 C86 99 86 110 80 118"
             fill="none"
-            stroke="#E3A4C0"
+            stroke="#B85D73"
             strokeWidth="8"
             strokeLinecap="round"
           />
-          <ellipse cx="79" cy="120" rx="8" ry="5" fill="#CF8DAA" opacity="0.95" />
+          <ellipse cx="79" cy="120" rx="8" ry="5" fill="#CF6F85" opacity="0.95" />
         </motion.g>
 
         <motion.g
@@ -112,11 +112,11 @@ export default function AppleMascot({
           <path
             d="M34 68 C20 72 14 82 15 90"
             fill="none"
-            stroke="#E8A7C4"
+            stroke="#B85D73"
             strokeWidth="9"
             strokeLinecap="round"
           />
-          <circle cx="15" cy="90" r="7" fill="#D994B2" />
+          <circle cx="15" cy="90" r="7" fill="#B85D73" />
         </motion.g>
 
         <motion.g
@@ -127,16 +127,16 @@ export default function AppleMascot({
           <path
             d="M84 68 C99 72 105 83 104 91"
             fill="none"
-            stroke="#E8A7C4"
+            stroke="#B85D73"
             strokeWidth="9"
             strokeLinecap="round"
           />
-          <circle cx="104" cy="91" r="7" fill="#D994B2" />
+          <circle cx="104" cy="91" r="7" fill="#B85D73" />
           {emotion === 'writing' && (
             <g transform="translate(103 88) rotate(-22)">
-              <rect x="-2" y="-18" width="4" height="20" rx="2" fill="#3D3244" />
-              <path d="M-2 2 H2 L0 8 Z" fill="#8DBA4E" />
-              <path d="M0 9 C-2 13 4 13 2 17" fill="none" stroke="#D994B2" strokeWidth="1.4" strokeLinecap="round" />
+              <rect x="-2" y="-18" width="4" height="20" rx="2" fill="#3F473D" />
+              <path d="M-2 2 H2 L0 8 Z" fill="#787B50" />
+              <path d="M0 9 C-2 13 4 13 2 17" fill="none" stroke="#B85D73" strokeWidth="1.4" strokeLinecap="round" />
             </g>
           )}
         </motion.g>
@@ -155,7 +155,7 @@ export default function AppleMascot({
                C94 99 103 70 98 48
                C93 24 71 17 60 31 Z"
             fill={`url(#${bodyGradientId})`}
-            stroke="#D998B6"
+            stroke="#B85D73"
             strokeWidth="2.4"
           />
 
@@ -180,15 +180,15 @@ export default function AppleMascot({
 
           {isSmiling ? (
             <>
-              <path d="M44 57 C48 63 53 63 57 57" fill="none" stroke="#3D3244" strokeWidth="3" strokeLinecap="round" />
-              <path d="M63 57 C67 63 72 63 76 57" fill="none" stroke="#3D3244" strokeWidth="3" strokeLinecap="round" />
+              <path d="M44 57 C48 63 53 63 57 57" fill="none" stroke="#3F473D" strokeWidth="3" strokeLinecap="round" />
+              <path d="M63 57 C67 63 72 63 76 57" fill="none" stroke="#3F473D" strokeWidth="3" strokeLinecap="round" />
             </>
           ) : isFocused ? (
             <>
-              <circle cx="49" cy="58" r="3.3" fill="#3D3244" />
-              <circle cx="71" cy="58" r="3.3" fill="#3D3244" />
-              <path d="M44 51 C48 48 53 49 56 53" fill="none" stroke="#3D3244" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
-              <path d="M64 53 C67 49 73 48 76 51" fill="none" stroke="#3D3244" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
+              <circle cx="49" cy="58" r="3.3" fill="#3F473D" />
+              <circle cx="71" cy="58" r="3.3" fill="#3F473D" />
+              <path d="M44 51 C48 48 53 49 56 53" fill="none" stroke="#3F473D" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
+              <path d="M64 53 C67 49 73 48 76 51" fill="none" stroke="#3F473D" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
             </>
           ) : (
             <>
@@ -197,7 +197,7 @@ export default function AppleMascot({
                 cy="57"
                 rx="3.3"
                 ry="4"
-                fill="#3D3244"
+                fill="#3F473D"
                 animate={shouldReduceMotion ? undefined : { scaleY: [1, 1, 0.15, 1] }}
                 transition={{ duration: 3.6, repeat: Infinity, repeatDelay: 1.7 }}
                 style={{ transformOrigin: '49px 57px' }}
@@ -207,7 +207,7 @@ export default function AppleMascot({
                 cy="57"
                 rx="3.3"
                 ry="4"
-                fill="#3D3244"
+                fill="#3F473D"
                 animate={shouldReduceMotion ? undefined : { scaleY: [1, 1, 0.15, 1] }}
                 transition={{ duration: 3.6, repeat: Infinity, repeatDelay: 1.7 }}
                 style={{ transformOrigin: '71px 57px' }}
@@ -216,11 +216,11 @@ export default function AppleMascot({
           )}
 
           {emotion === 'proud' ? (
-            <path d="M45 74 C52 84 68 84 75 74" fill="none" stroke="#3D3244" strokeWidth="3.2" strokeLinecap="round" />
+            <path d="M45 74 C52 84 68 84 75 74" fill="none" stroke="#3F473D" strokeWidth="3.2" strokeLinecap="round" />
           ) : isSmiling ? (
-            <path d="M47 74 C53 82 67 82 73 74" fill="none" stroke="#3D3244" strokeWidth="3" strokeLinecap="round" />
+            <path d="M47 74 C53 82 67 82 73 74" fill="none" stroke="#3F473D" strokeWidth="3" strokeLinecap="round" />
           ) : (
-            <path d="M48 75 C54 80 66 80 72 75" fill="none" stroke="#3D3244" strokeWidth="2.6" strokeLinecap="round" />
+            <path d="M48 75 C54 80 66 80 72 75" fill="none" stroke="#3F473D" strokeWidth="2.6" strokeLinecap="round" />
           )}
         </motion.g>
 
@@ -241,7 +241,7 @@ export default function AppleMascot({
             d="M64 22 C68 8 91 9 96 11 C91 21 77 30 64 22 Z"
             fill={`url(#${leafGradientId})`}
           />
-          <path d="M69 21 C78 17 86 14 94 11" fill="none" stroke="#F6F9BD" strokeWidth="1.6" strokeLinecap="round" opacity="0.75" />
+          <path d="M69 21 C78 17 86 14 94 11" fill="none" stroke="#C7C99E" strokeWidth="1.6" strokeLinecap="round" opacity="0.75" />
         </motion.g>
 
         {emotion === 'proud' && (
@@ -249,8 +249,8 @@ export default function AppleMascot({
             animate={shouldReduceMotion ? undefined : { opacity: [0.25, 1, 0.25], scale: [0.92, 1.08, 0.92] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <path d="M22 34 L25 41 L32 44 L25 47 L22 54 L19 47 L12 44 L19 41 Z" fill="#F3C6D8" />
-            <path d="M96 46 L98 51 L103 53 L98 55 L96 60 L94 55 L89 53 L94 51 Z" fill="#C3D162" />
+            <path d="M22 34 L25 41 L32 44 L25 47 L22 54 L19 47 L12 44 L19 41 Z" fill="#CF6F85" />
+            <path d="M96 46 L98 51 L103 53 L98 55 L96 60 L94 55 L89 53 L94 51 Z" fill="#959863" />
           </motion.g>
         )}
       </svg>

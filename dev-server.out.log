@@ -1,0 +1,13 @@
+
+> @figma/my-make-file@0.0.1 dev
+> concurrently "vite" "tsx server/ai-reflection.ts"
+
+[1] ◇ injected env (3) from .env.local // tip: ⌘ suppress logs { quiet: true }
+[1] Perspekta AI server running on http://localhost:3001
+[0] Port 5173 is in use, trying another one...
+[0] 
+[0]   [32m[1mVITE[22m v6.3.5[39m  [2mready in [0m[1m1031[22m[2m[0m ms[22m
+[0] 
+[0]   [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5174[22m/[39m
+[0] [2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[1] tsx server/ai-reflection.ts exited with code 0

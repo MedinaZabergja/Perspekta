@@ -3,43 +3,43 @@
 :root {
   --font-size: 16px;
   --save-banner-height: 72px;
-  --background: #F0F9E8;
-  --foreground: #3d3244;
+  --background: #F0E2DF;
+  --foreground: #3F473D;
   --card: #ffffff;
-  --card-foreground: #3d3244;
+  --card-foreground: #3F473D;
   --popover: #ffffff;
-  --popover-foreground: #3d3244;
-  --primary: #F1C6D9;
-  --primary-foreground: #3d3244;
-  --secondary: #AED7D3;
-  --secondary-foreground: #3d3244;
-  --muted: #F0F9E8;
-  --muted-foreground: #B5A4AC;
-  --accent: #C3D162;
-  --accent-foreground: #3d3244;
-  --destructive: #F1C6D9;
+  --popover-foreground: #3F473D;
+  --primary: #CF6F85;
+  --primary-foreground: #ffffff;
+  --secondary: #576154;
+  --secondary-foreground: #ffffff;
+  --muted: #F0E2DF;
+  --muted-foreground: #576154;
+  --accent: #959863;
+  --accent-foreground: #ffffff;
+  --destructive: #CF6F85;
   --destructive-foreground: #ffffff;
-  --border: rgba(181, 164, 172, 0.25);
+  --border: rgba(87, 97, 84, 0.22);
   --input: transparent;
   --input-background: #ffffff;
-  --switch-background: #AED7D3;
+  --switch-background: #C4DEDF;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #F1C6D9;
-  --chart-1: #F1C6D9;
-  --chart-2: #AED7D3;
-  --chart-3: #C3D162;
-  --chart-4: #B5A4AC;
-  --chart-5: #F0F9E8;
+  --ring: #CF6F85;
+  --chart-1: #CF6F85;
+  --chart-2: #C4DEDF;
+  --chart-3: #959863;
+  --chart-4: #576154;
+  --chart-5: #F0E2DF;
   --radius: 1.25rem;
-  --sidebar: #F0F9E8;
-  --sidebar-foreground: #3d3244;
-  --sidebar-primary: #F1C6D9;
-  --sidebar-primary-foreground: #3d3244;
-  --sidebar-accent: #AED7D3;
-  --sidebar-accent-foreground: #3d3244;
-  --sidebar-border: rgba(181, 164, 172, 0.25);
-  --sidebar-ring: #F1C6D9;
+  --sidebar: #F0E2DF;
+  --sidebar-foreground: #3F473D;
+  --sidebar-primary: #CF6F85;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #C4DEDF;
+  --sidebar-accent-foreground: #3F473D;
+  --sidebar-border: rgba(87, 97, 84, 0.22);
+  --sidebar-ring: #CF6F85;
 }
 
 @media (max-width: 640px) {
@@ -136,10 +136,10 @@
     color: var(--foreground);
     background-color: var(--background);
     background-image:
-      radial-gradient(circle at top center, rgba(241, 198, 217, 0.32), transparent 38%),
-      radial-gradient(circle at 18% 22%, rgba(174, 215, 211, 0.36), transparent 34%),
-      radial-gradient(circle at 82% 78%, rgba(195, 209, 98, 0.22), transparent 30%),
-      linear-gradient(180deg, #f8fff1 0%, #f0f9e8 52%, #eef6e1 100%);
+      radial-gradient(circle at top center, rgba(207, 111, 133, 0.28), transparent 38%),
+      radial-gradient(circle at 18% 22%, rgba(196, 222, 223, 0.46), transparent 34%),
+      radial-gradient(circle at 82% 78%, rgba(149, 152, 99, 0.18), transparent 30%),
+      linear-gradient(180deg, #F7EEEE 0%, #F0E2DF 52%, #E6D6D3 100%);
     background-attachment: fixed;
     @apply text-foreground;
   }

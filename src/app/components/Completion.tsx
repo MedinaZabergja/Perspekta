@@ -28,14 +28,14 @@ export default function Completion({
         angle: 60,
         spread: 55,
         origin: { x: 0, y: 0.6 },
-        colors: ['#F1C6D9', '#AED7D3', '#C3D162'],
+        colors: ['#CF6F85', '#C4DEDF', '#959863'],
       });
       confetti({
         particleCount: 2,
         angle: 120,
         spread: 55,
         origin: { x: 1, y: 0.6 },
-        colors: ['#F1C6D9', '#AED7D3', '#C3D162'],
+        colors: ['#CF6F85', '#C4DEDF', '#959863'],
       });
 
       if (Date.now() < end) {
@@ -69,52 +69,52 @@ export default function Completion({
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <h1 className="text-4xl text-[#3d3244]">Wonderful Work! 🌟</h1>
-            <p className="text-lg text-[#B5A4AC] max-w-xl mx-auto">
+            <h1 className="text-4xl text-[#3F473D]">Wonderful Work! 🌟</h1>
+            <p className="text-lg text-[#576154] max-w-xl mx-auto">
               You've taken an important step toward a more balanced perspective
             </p>
           </motion.div>
 
           <motion.div
-            className="w-full bg-white/90 backdrop-blur-sm rounded-3xl p-8 space-y-6 border border-[#F1C6D9]/20 shadow-lg"
+            className="w-full bg-white/90 backdrop-blur-sm rounded-3xl p-8 space-y-6 border border-[#CF6F85]/20 shadow-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
           >
             <div className="space-y-3">
-              <h2 className="text-xl text-[#3d3244]">Your Balanced Perspective</h2>
-              <div className="bg-gradient-to-br from-[#C3D162]/30 to-[#AED7D3]/30 rounded-2xl p-6 border border-[#F1C6D9]/20">
-                <p className="text-[#3d3244] leading-relaxed italic">"{perspective}"</p>
+              <h2 className="text-xl text-[#3F473D]">Your Balanced Perspective</h2>
+              <div className="bg-gradient-to-br from-[#959863]/30 to-[#C4DEDF]/30 rounded-2xl p-6 border border-[#CF6F85]/20">
+                <p className="text-[#3F473D] leading-relaxed italic">"{perspective}"</p>
               </div>
             </div>
 
             <div className="space-y-3">
-              <h2 className="text-xl text-[#3d3244]">AI Balanced Reflection</h2>
-              <div className="bg-[#ffffff] rounded-2xl p-6 border border-[#AED7D3]/30">
+              <h2 className="text-xl text-[#3F473D]">AI Balanced Reflection</h2>
+              <div className="bg-[#ffffff] rounded-2xl p-6 border border-[#C4DEDF]/30">
                 {loadingAi && (
-                  <p className="text-[#B5A4AC] text-sm">
+                  <p className="text-[#576154] text-sm">
                     Perspekta is creating a realistic balanced reflection...
                   </p>
                 )}
 
                 {!loadingAi && aiReflection && (
-                  <p className="text-[#3d3244] leading-relaxed">{aiReflection}</p>
+                  <p className="text-[#3F473D] leading-relaxed">{aiReflection}</p>
                 )}
 
                 {!loadingAi && aiError && (
-                  <p className="text-[#B5A4AC] text-sm">{aiError}</p>
+                  <p className="text-[#576154] text-sm">{aiError}</p>
                 )}
               </div>
             </div>
 
             <div className="bg-[#ffffff] rounded-2xl p-6 space-y-3">
-              <h3 className="font-medium text-[#3d3244]">What Happens Next?</h3>
-              <p className="text-[#B5A4AC] text-sm">
+              <h3 className="font-medium text-[#3F473D]">What Happens Next?</h3>
+              <p className="text-[#576154] text-sm">
                 To prevent rumination and give your mind space to rest, Perspekta will enter
                 Reflection Mode. During this time, you'll be encouraged to step away from the
                 screen and engage with real-world activities.
               </p>
-              <p className="text-[#B5A4AC] text-sm">
+              <p className="text-[#576154] text-sm">
                 Remember: thoughts may still appear throughout the day, and that's okay. You've
                 already done the meaningful work of reflection.
               </p>
@@ -122,7 +122,7 @@ export default function Completion({
           </motion.div>
 
           <motion.button
-            className="px-8 py-4 bg-[#F1C6D9] text-white rounded-full hover:bg-[#e5b0c7] transition-colors shadow-sm"
+            className="px-8 py-4 bg-[#CF6F85] text-white rounded-full hover:bg-[#B85D73] transition-colors shadow-sm"
             onClick={onContinue}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

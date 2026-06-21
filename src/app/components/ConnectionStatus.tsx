@@ -40,8 +40,8 @@ export default function ConnectionStatus() {
           <div
             className={`flex items-center gap-2 px-4 py-3 rounded-2xl shadow-lg backdrop-blur-sm ${
               isOnline
-                ? 'bg-[#F1C6D9]/90 text-white'
-                : 'bg-[#B5A4AC]/90 text-white'
+                ? 'bg-[#CF6F85]/90 text-white'
+                : 'bg-[#576154]/90 text-white'
             }`}
           >
             {isOnline ? (

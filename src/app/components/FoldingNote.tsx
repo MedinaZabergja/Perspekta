@@ -91,7 +91,7 @@ export default function FoldingNote({ text, onComplete }: FoldingNoteProps) {
         }}
       >
         <motion.div
-          className="relative overflow-hidden border border-[#F1C6D9]/45 bg-[#FFF8F3] shadow-[0_24px_60px_rgba(181,164,172,0.28)]"
+          className="relative overflow-hidden border border-[#CF6F85]/45 bg-[#FFF8F3] shadow-[0_24px_60px_rgba(181,164,172,0.28)]"
           animate={{
             width: metrics.width,
             height: metrics.height,
@@ -114,7 +114,7 @@ export default function FoldingNote({ text, onComplete }: FoldingNoteProps) {
                   />
                 ))}
                 <motion.p
-                  className="line-clamp-3 pt-2 text-xs italic leading-relaxed text-[#3d3244]/75"
+                  className="line-clamp-3 pt-2 text-xs italic leading-relaxed text-[#3F473D]/75"
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.42, duration: 0.36 }}
@@ -154,7 +154,7 @@ export default function FoldingNote({ text, onComplete }: FoldingNoteProps) {
           )}
 
           <motion.div
-            className="absolute right-0 top-0 h-10 w-10 bg-[#F1C6D9]/18"
+            className="absolute right-0 top-0 h-10 w-10 bg-[#CF6F85]/18"
             style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 0)' }}
             initial={{ scale: 0 }}
             animate={{ scale: stage === 'writing' ? 1 : 0.62 }}
@@ -165,12 +165,12 @@ export default function FoldingNote({ text, onComplete }: FoldingNoteProps) {
         {stage === 'writing' && (
           <>
             <motion.span
-              className="absolute -right-4 -top-4 h-5 w-5 rounded-full bg-[#C3D162]/75"
+              className="absolute -right-4 -top-4 h-5 w-5 rounded-full bg-[#959863]/75"
               animate={shouldReduceMotion ? undefined : { scale: [0.9, 1.18, 0.9], opacity: [0.55, 1, 0.55] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
             />
             <motion.span
-              className="absolute -bottom-3 -left-3 h-3 w-3 rounded-full bg-[#F1C6D9]/80"
+              className="absolute -bottom-3 -left-3 h-3 w-3 rounded-full bg-[#CF6F85]/80"
               animate={shouldReduceMotion ? undefined : { y: [0, -5, 0], opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             />

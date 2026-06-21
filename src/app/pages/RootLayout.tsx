@@ -115,15 +115,15 @@ export default function RootLayout() {
         <div className="text-center space-y-4">
           <div className="w-16 h-16 mx-auto">
             <svg viewBox="0 0 100 100" className="w-full h-full animate-pulse">
-              <circle cx="50" cy="55" r="35" fill="#AED7D3" />
-              <circle cx="30" cy="55" r="6" fill="#F1C6D9" opacity="0.7" />
-              <circle cx="70" cy="55" r="6" fill="#F1C6D9" opacity="0.7" />
-              <circle cx="40" cy="45" r="3" fill="#3d3244" />
-              <circle cx="60" cy="45" r="3" fill="#3d3244" />
-              <line x1="42" y1="62" x2="58" y2="62" stroke="#3d3244" strokeWidth="2" strokeLinecap="round" />
+              <circle cx="50" cy="55" r="35" fill="#C4DEDF" />
+              <circle cx="30" cy="55" r="6" fill="#CF6F85" opacity="0.7" />
+              <circle cx="70" cy="55" r="6" fill="#CF6F85" opacity="0.7" />
+              <circle cx="40" cy="45" r="3" fill="#3F473D" />
+              <circle cx="60" cy="45" r="3" fill="#3F473D" />
+              <line x1="42" y1="62" x2="58" y2="62" stroke="#3F473D" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </div>
-          <p className="text-[#B5A4AC]">Loading Perspekta...</p>
+          <p className="text-[#576154]">Loading Perspekta...</p>
         </div>
       </div>
     );

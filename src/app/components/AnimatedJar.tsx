@@ -51,7 +51,7 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
       aria-label={`Fear jar with ${fears.length} saved ${fears.length === 1 ? 'fear' : 'fears'}`}
     >
       <motion.div
-        className="absolute inset-x-10 bottom-7 h-24 rounded-full bg-[#AED7D3]/25 blur-3xl"
+        className="absolute inset-x-10 bottom-7 h-24 rounded-full bg-[#C4DEDF]/25 blur-3xl"
         animate={shouldReduceMotion ? undefined : { opacity: isAnimating ? [0.35, 0.7, 0.35] : 0.35 }}
         transition={{ duration: 1.8, repeat: isAnimating ? Infinity : 0, ease: 'easeInOut' }}
       />
@@ -64,33 +64,33 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
         <defs>
           <radialGradient id={glowGradientId} cx="50%" cy="42%" r="64%">
             <stop offset="0%" stopColor="#FDF2F8" stopOpacity="0.95" />
-            <stop offset="62%" stopColor="#E8F7F5" stopOpacity="0.48" />
-            <stop offset="100%" stopColor="#E8F7F5" stopOpacity="0" />
+            <stop offset="62%" stopColor="#DDEBEC" stopOpacity="0.48" />
+            <stop offset="100%" stopColor="#DDEBEC" stopOpacity="0" />
           </radialGradient>
 
           <linearGradient id={glassGradientId} x1="0%" y1="6%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.58" />
-            <stop offset="46%" stopColor="#DDF3F0" stopOpacity="0.42" />
-            <stop offset="100%" stopColor="#AED7D3" stopOpacity="0.24" />
+            <stop offset="46%" stopColor="#D5E8E9" stopOpacity="0.42" />
+            <stop offset="100%" stopColor="#C4DEDF" stopOpacity="0.24" />
           </linearGradient>
 
           <linearGradient id={frontGlassGradientId} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.22" />
             <stop offset="48%" stopColor="#FFFFFF" stopOpacity="0.07" />
-            <stop offset="100%" stopColor="#AED7D3" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#C4DEDF" stopOpacity="0.22" />
           </linearGradient>
 
           <linearGradient id={lidGradientId} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#F7D4E4" />
-            <stop offset="100%" stopColor="#DFA2BE" />
+            <stop offset="0%" stopColor="#DFA0B0" />
+            <stop offset="100%" stopColor="#B85D73" />
           </linearGradient>
 
           <filter id={shadowFilterId} x="-35%" y="-35%" width="170%" height="170%">
-            <feDropShadow dx="0" dy="18" stdDeviation="18" floodColor="#7FAFAA" floodOpacity="0.22" />
+            <feDropShadow dx="0" dy="18" stdDeviation="18" floodColor="#8FAFB0" floodOpacity="0.22" />
           </filter>
         </defs>
 
-        <ellipse cx="180" cy="381" rx="95" ry="18" fill="#9BBFBB" opacity="0.18" />
+        <ellipse cx="180" cy="381" rx="95" ry="18" fill="#95B8BA" opacity="0.18" />
         <circle cx="180" cy="236" r="150" fill={`url(#${glowGradientId})`} />
 
         <motion.g
@@ -111,12 +111,12 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
           <path
             d="M112 129 C112 106 130 98 153 98 H207 C230 98 248 106 248 129 L257 310 C259 348 231 374 192 374 H168 C129 374 101 348 103 310 L112 129 Z"
             fill={`url(#${glassGradientId})`}
-            stroke="#8FC9C3"
+            stroke="#9EC4C6"
             strokeWidth="3"
           />
 
-          <ellipse cx="180" cy="111" rx="70" ry="20" fill="#EAF8F6" opacity="0.72" />
-          <ellipse cx="180" cy="111" rx="55" ry="12" fill="#BEE3DF" opacity="0.25" />
+          <ellipse cx="180" cy="111" rx="70" ry="20" fill="#E8F0F0" opacity="0.72" />
+          <ellipse cx="180" cy="111" rx="55" ry="12" fill="#C4DEDF" opacity="0.25" />
 
           <g opacity="0.96">
             {visibleFears.map((fear, index) => {
@@ -159,7 +159,7 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
                     height="22"
                     rx="4"
                     fill={layout.color}
-                    stroke="#E9BDD0"
+                    stroke="#C8798F"
                     strokeWidth="1.2"
                     animate={
                       shouldReduceMotion || !isAnimating || !isNewest
@@ -168,9 +168,9 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
                     }
                     transition={{ duration: 0.7, delay: 3.05, ease: 'easeOut' }}
                   />
-                  <path d="M-19 0 H19" stroke="#E9BDD0" strokeWidth="0.8" opacity="0.5" />
-                  <path d="M0 -11 V11" stroke="#E9BDD0" strokeWidth="0.8" opacity="0.38" />
-                  <path d="M-14 -6 H8" stroke="#CBA4B5" strokeWidth="0.8" opacity="0.2" strokeLinecap="round" />
+                  <path d="M-19 0 H19" stroke="#C8798F" strokeWidth="0.8" opacity="0.5" />
+                  <path d="M0 -11 V11" stroke="#C8798F" strokeWidth="0.8" opacity="0.38" />
+                  <path d="M-14 -6 H8" stroke="#9F6F7B" strokeWidth="0.8" opacity="0.2" strokeLinecap="round" />
                 </motion.g>
               );
             })}
@@ -179,7 +179,7 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
           <path
             d="M112 129 C112 106 130 98 153 98 H207 C230 98 248 106 248 129 L257 310 C259 348 231 374 192 374 H168 C129 374 101 348 103 310 L112 129 Z"
             fill={`url(#${frontGlassGradientId})`}
-            stroke="#8FC9C3"
+            stroke="#9EC4C6"
             strokeWidth="2"
           />
 
@@ -199,7 +199,7 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
             strokeWidth="5"
             opacity="0.23"
           />
-          <ellipse cx="180" cy="111" rx="70" ry="20" fill="none" stroke="#7DBDB6" strokeWidth="4" />
+          <ellipse cx="180" cy="111" rx="70" ry="20" fill="none" stroke="#8FB7B9" strokeWidth="4" />
           <path d="M113 113 C133 131 226 131 247 113" fill="none" stroke="#FFFFFF" strokeWidth="3" opacity="0.55" />
         </motion.g>
 
@@ -218,9 +218,9 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
           transition={{ duration: 0.62, type: 'spring', stiffness: 160, damping: 15 }}
           style={{ transformOrigin: '135px 82px' }}
         >
-          <ellipse cx="180" cy="84" rx="82" ry="17" fill={`url(#${lidGradientId})`} stroke="#D793B1" strokeWidth="2.5" />
-          <rect x="129" y="61" width="102" height="22" rx="10" fill="#E9B7CD" stroke="#D793B1" strokeWidth="2" />
-          <ellipse cx="180" cy="62" rx="44" ry="10" fill="#F7D4E4" opacity="0.85" />
+          <ellipse cx="180" cy="84" rx="82" ry="17" fill={`url(#${lidGradientId})`} stroke="#B85D73" strokeWidth="2.5" />
+          <rect x="129" y="61" width="102" height="22" rx="10" fill="#C8798F" stroke="#B85D73" strokeWidth="2" />
+          <ellipse cx="180" cy="62" rx="44" ry="10" fill="#DFA0B0" opacity="0.85" />
           <path d="M130 80 C149 92 211 92 230 80" fill="none" stroke="#FFFFFF" strokeWidth="3" opacity="0.35" />
         </motion.g>
 
@@ -248,8 +248,8 @@ export default function AnimatedJar({ fears, isAnimating = false }: AnimatedJarP
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: 0.55, type: 'spring', stiffness: 190, damping: 16 }}
       >
-        <p className="text-xl leading-none text-[#3d3244]">{fears.length}</p>
-        <p className="mt-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#B5A4AC]">in jar</p>
+        <p className="text-xl leading-none text-[#3F473D]">{fears.length}</p>
+        <p className="mt-1 text-[0.62rem] uppercase tracking-[0.22em] text-[#576154]">in jar</p>
       </motion.div>
     </div>
   );

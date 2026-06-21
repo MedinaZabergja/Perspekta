@@ -73,7 +73,7 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 bg-[#3d3244]/40 backdrop-blur-sm z-40"
+            className="fixed inset-0 bg-[#3F473D]/40 backdrop-blur-sm z-40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -83,19 +83,19 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
           {/* Modal */}
           <div className="fixed inset-0 flex items-center justify-center z-50 p-6">
             <motion.div
-              className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 max-w-md w-full border border-[#F1C6D9]/20 shadow-2xl"
+              className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 max-w-md w-full border border-[#CF6F85]/20 shadow-2xl"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             >
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl text-[#3d3244] font-medium">
+                <h2 className="text-2xl text-[#3F473D] font-medium">
                   {mode === 'signin' ? 'Sign In' : 'Create Account'}
                 </h2>
                 <button
                   onClick={onClose}
-                  className="p-2 text-[#B5A4AC] hover:text-[#F1C6D9] transition-colors"
+                  className="p-2 text-[#576154] hover:text-[#CF6F85] transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -104,16 +104,16 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
               <form onSubmit={handleSubmit} className="space-y-4">
                 {mode === 'signup' && (
                   <div className="space-y-2">
-                    <label className="block text-[#3d3244] text-sm">Name</label>
+                    <label className="block text-[#3F473D] text-sm">Name</label>
                     <div className="relative">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B5A4AC]" />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#576154]" />
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         autoComplete="name"
                         placeholder="Your name"
-                        className="w-full pl-12 pr-4 py-3 bg-[#ffffff] border-2 border-[#F1C6D9]/30 rounded-2xl text-[#3d3244] placeholder-[#B5A4AC]/50 focus:border-[#F1C6D9] focus:outline-none transition-colors"
+                        className="w-full pl-12 pr-4 py-3 bg-[#ffffff] border-2 border-[#CF6F85]/30 rounded-2xl text-[#3F473D] placeholder-[#576154]/50 focus:border-[#CF6F85] focus:outline-none transition-colors"
                         required={mode === 'signup'}
                       />
                     </div>
@@ -121,43 +121,43 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
                 )}
 
                 <div className="space-y-2">
-                  <label className="block text-[#3d3244] text-sm">Email</label>
+                  <label className="block text-[#3F473D] text-sm">Email</label>
                   <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B5A4AC]" />
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#576154]" />
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       autoComplete="email"
                       placeholder="your@email.com"
-                      className="w-full pl-12 pr-4 py-3 bg-[#ffffff] border-2 border-[#F1C6D9]/30 rounded-2xl text-[#3d3244] placeholder-[#B5A4AC]/50 focus:border-[#F1C6D9] focus:outline-none transition-colors"
+                      className="w-full pl-12 pr-4 py-3 bg-[#ffffff] border-2 border-[#CF6F85]/30 rounded-2xl text-[#3F473D] placeholder-[#576154]/50 focus:border-[#CF6F85] focus:outline-none transition-colors"
                       required
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-[#3d3244] text-sm">Password</label>
+                  <label className="block text-[#3F473D] text-sm">Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B5A4AC]" />
+                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#576154]" />
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
                       placeholder="••••••••"
-                      className="w-full pl-12 pr-4 py-3 bg-[#ffffff] border-2 border-[#F1C6D9]/30 rounded-2xl text-[#3d3244] placeholder-[#B5A4AC]/50 focus:border-[#F1C6D9] focus:outline-none transition-colors"
+                      className="w-full pl-12 pr-4 py-3 bg-[#ffffff] border-2 border-[#CF6F85]/30 rounded-2xl text-[#3F473D] placeholder-[#576154]/50 focus:border-[#CF6F85] focus:outline-none transition-colors"
                       required
                       minLength={6}
                     />
                   </div>
                   {mode === 'signup' && (
-                    <p className="text-xs text-[#B5A4AC] ml-2">At least 6 characters</p>
+                    <p className="text-xs text-[#576154] ml-2">At least 6 characters</p>
                   )}
                 </div>
 
                 {error && (
-                  <div className="bg-[#F1C6D9]/20 border border-[#F1C6D9] rounded-2xl p-3 text-sm text-[#3d3244]">
+                  <div className="bg-[#CF6F85]/20 border border-[#CF6F85] rounded-2xl p-3 text-sm text-[#3F473D]">
                     {error}
                   </div>
                 )}
@@ -167,8 +167,8 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
                   disabled={isLoading}
                   className={`w-full px-8 py-3 rounded-full transition-all ${
                     isLoading
-                      ? 'bg-[#e8f7f5] text-[#B5A4AC] cursor-not-allowed'
-                      : 'bg-[#F1C6D9] text-white hover:bg-[#e5b0c7] shadow-sm'
+                      ? 'bg-[#E8C9D0] text-[#9F5B6C] cursor-not-allowed'
+                      : 'bg-[#CF6F85] text-white hover:bg-[#B85D73] shadow-sm'
                   }`}
                   whileHover={!isLoading ? { scale: 1.02 } : {}}
                   whileTap={!isLoading ? { scale: 0.98 } : {}}
@@ -180,7 +180,7 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
               <div className="mt-6 text-center">
                 <button
                   onClick={switchMode}
-                  className="text-sm text-[#B5A4AC] hover:text-[#F1C6D9] transition-colors"
+                  className="text-sm text-[#576154] hover:text-[#CF6F85] transition-colors"
                 >
                   {mode === 'signin' ? "Don't have an account? " : 'Already have an account? '}
                   <span className="font-medium">
@@ -189,7 +189,7 @@ export default function AuthModal({ isOpen, onClose, onSignIn, onSignUp }: AuthM
                 </button>
               </div>
 
-              <div className="mt-4 text-xs text-[#B5A4AC] text-center">
+              <div className="mt-4 text-xs text-[#576154] text-center">
                 Your data is stored securely and privately
               </div>
             </motion.div>

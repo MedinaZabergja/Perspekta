@@ -48,8 +48,8 @@ export default function Home({
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
-            <h1 className="text-4xl text-[#3d3244]">Welcome Back</h1>
-            <p className="text-lg text-[#B5A4AC]">Ready to explore a new perspective?</p>
+            <h1 className="text-4xl text-[#3F473D]">Welcome Back</h1>
+            <p className="text-lg text-[#576154]">Ready to explore a new perspective?</p>
           </motion.div>
 
           <motion.div
@@ -61,8 +61,8 @@ export default function Home({
             <motion.button
               className={`w-full rounded-3xl px-8 py-6 text-white transition-all shadow-lg ${
                 isReflectionLocked
-                  ? 'cursor-not-allowed bg-gradient-to-br from-[#d9c4cf] to-[#cbb7c2]'
-                  : 'bg-gradient-to-br from-[#F1C6D9] to-[#e5b0c7] hover:from-[#e5b0c7] hover:to-[#b88585]'
+                  ? 'cursor-not-allowed bg-gradient-to-br from-[#E8C9D0] to-[#E2BBC5] text-[#9F5B6C]'
+                  : 'bg-gradient-to-br from-[#CF6F85] to-[#B85D73] hover:from-[#B85D73] hover:to-[#8E4858]'
               }`}
               onClick={onStartReflection}
               disabled={isReflectionLocked}
@@ -84,7 +84,7 @@ export default function Home({
 
             {!user && (
               <motion.button
-                className="w-full px-8 py-4 bg-[#F1C6D9] text-white rounded-3xl hover:bg-[#e5b0c7] transition-all shadow-sm"
+                className="w-full px-8 py-4 bg-[#CF6F85] text-white rounded-3xl hover:bg-[#B85D73] transition-all shadow-sm"
                 onClick={onOpenAuth}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -98,7 +98,7 @@ export default function Home({
 
             {canReturnToReflectionMode && onReturnToReflectionMode && (
               <motion.button
-                className="mx-auto block rounded-full px-4 py-2 text-sm bg-[#e8f7f5] text-[#3d3244] hover:bg-[#AED7D3] transition-colors"
+                className="mx-auto block rounded-full px-4 py-2 text-sm bg-[#576154] text-white hover:bg-[#434B41] transition-colors"
                 onClick={onReturnToReflectionMode}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -108,7 +108,7 @@ export default function Home({
             )}
 
             <motion.button
-              className="w-full px-8 py-4 bg-white/90 backdrop-blur-sm text-[#3d3244] rounded-3xl hover:bg-white transition-all border border-[#F1C6D9]/20 shadow-sm"
+              className="w-full px-8 py-4 bg-white/90 backdrop-blur-sm text-[#3F473D] rounded-3xl hover:bg-white transition-all border border-[#CF6F85]/20 shadow-sm"
               onClick={onOpenFearJar}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -120,7 +120,7 @@ export default function Home({
             </motion.button>
 
             <motion.button
-              className="w-full px-8 py-4 bg-white/90 backdrop-blur-sm text-[#3d3244] rounded-3xl hover:bg-white transition-all border border-[#F1C6D9]/20 shadow-sm"
+              className="w-full px-8 py-4 bg-white/90 backdrop-blur-sm text-[#3F473D] rounded-3xl hover:bg-white transition-all border border-[#CF6F85]/20 shadow-sm"
               onClick={onViewHistory}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -133,7 +133,7 @@ export default function Home({
           </motion.div>
 
           <motion.div
-            className="text-center text-sm text-[#B5A4AC] max-w-md"
+            className="text-center text-sm text-[#576154] max-w-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}

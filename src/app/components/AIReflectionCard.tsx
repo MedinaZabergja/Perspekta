@@ -26,27 +26,27 @@ export function AIReflectionCard({ aiReflection }: AIReflectionCardProps) {
 
   const getGradient = (index: number) => {
     const gradients = [
-      'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)',
-      'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
-      'linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%)',
+      'linear-gradient(135deg, #F7EEEE 0%, #F0E2DF 100%)',
+      'linear-gradient(135deg, #E8F0F0 0%, #C4DEDF 100%)',
+      'linear-gradient(135deg, #F2E8E4 0%, #E2D7C2 100%)',
     ];
     return gradients[index] || gradients[0];
   };
 
   const getBorderColor = (index: number) => {
-    return ['#e0c3fc', '#a7f3d0', '#fde68a'][index] || '#e0c3fc';
+    return ['#CF6F85', '#C4DEDF', '#959863'][index] || '#CF6F85';
   };
 
   const getLabelColor = (index: number) => {
-    return ['#8b5cf6', '#10b981', '#f59e0b'][index] || '#8b5cf6';
+    return ['#B85D73', '#576154', '#6F7248'][index] || '#B85D73';
   };
 
   const getLabelBg = (index: number) => {
-    return ['rgba(139, 92, 246, 0.1)', 'rgba(16, 185, 129, 0.1)', 'rgba(245, 158, 11, 0.1)'][index] || 'rgba(139, 92, 246, 0.1)';
+    return ['rgba(207, 111, 133, 0.14)', 'rgba(196, 222, 223, 0.4)', 'rgba(149, 152, 99, 0.18)'][index] || 'rgba(207, 111, 133, 0.14)';
   };
 
   const getBoldColor = (index: number) => {
-    return ['#6b46c1', '#059669', '#d97706'][index] || '#6b46c1';
+    return ['#B85D73', '#576154', '#6F7248'][index] || '#B85D73';
   };
 
   return (
@@ -54,7 +54,7 @@ export function AIReflectionCard({ aiReflection }: AIReflectionCardProps) {
       <h3 style={{
         fontSize: '15px',
         fontWeight: 700,
-        color: '#5a4a6a',
+        color: '#3F473D',
         margin: '0 0 16px 0',
         display: 'flex',
         alignItems: 'center',
@@ -80,7 +80,7 @@ export function AIReflectionCard({ aiReflection }: AIReflectionCardProps) {
                 background: getGradient(i),
                 borderRadius: '20px',
                 padding: '16px 20px',
-                boxShadow: '0 2px 12px rgba(139, 92, 246, 0.08)',
+                boxShadow: '0 2px 12px rgba(87, 97, 84, 0.08)',
                 border: `2px solid ${getBorderColor(i)}`,
                 transition: 'all 0.3s ease',
                 marginLeft: `${i * 12}px`,
@@ -89,11 +89,11 @@ export function AIReflectionCard({ aiReflection }: AIReflectionCardProps) {
               }}
               onMouseEnter={(e) => {
                 (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(139, 92, 246, 0.15)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(207, 111, 133, 0.16)';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(139, 92, 246, 0.08)';
+                (e.currentTarget as HTMLElement).style.boxShadow = '0 2px 12px rgba(87, 97, 84, 0.08)';
               }}
             >
               <div style={{
@@ -120,7 +120,7 @@ export function AIReflectionCard({ aiReflection }: AIReflectionCardProps) {
                 margin: 0,
                 fontSize: '15px',
                 lineHeight: 1.6,
-                color: '#4a5568',
+                color: '#3F473D',
                 fontWeight: 500,
               }}>
                 {cleanText.split(/(\*\*.*?\*\*)/g).map((part, idx) => {

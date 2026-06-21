@@ -63,15 +63,15 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
           <motion.button
             onClick={onBack}
             aria-label="Go back"
-            className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-white/70 text-[#A994A1] shadow-sm backdrop-blur-sm transition-colors hover:text-[#D994B2]"
+            className="grid h-12 w-12 place-items-center rounded-full border border-white/70 bg-white/70 text-[#A994A1] shadow-sm backdrop-blur-sm transition-colors hover:text-[#B85D73]"
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.96 }}
           >
             <ArrowLeft className="h-5 w-5" />
           </motion.button>
           <div className="min-w-0 flex-1">
-            <p className="mb-1 text-xs uppercase tracking-[0.28em] text-[#B5A4AC]">gentle storage</p>
-            <h1 className="text-3xl text-[#3d3244] sm:text-4xl">Fear Jar</h1>
+            <p className="mb-1 text-xs uppercase tracking-[0.28em] text-[#576154]">gentle storage</p>
+            <h1 className="text-3xl text-[#3F473D] sm:text-4xl">Fear Jar</h1>
             <p className="mt-1 max-w-xl text-[#A994A1]">
               Fold worries away and store them gently.
             </p>
@@ -86,19 +86,19 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.08, duration: 0.56 }}
           >
-            <div className="absolute -left-16 top-10 h-44 w-44 rounded-full bg-[#AED7D3]/28 blur-3xl" />
-            <div className="absolute -right-12 bottom-10 h-52 w-52 rounded-full bg-[#F1C6D9]/24 blur-3xl" />
+            <div className="absolute -left-16 top-10 h-44 w-44 rounded-full bg-[#C4DEDF]/28 blur-3xl" />
+            <div className="absolute -right-12 bottom-10 h-52 w-52 rounded-full bg-[#CF6F85]/24 blur-3xl" />
 
             <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 px-1">
               <div>
-                <p className="text-sm font-medium text-[#3d3244]">Your sealed jar</p>
+                <p className="text-sm font-medium text-[#3F473D]">Your sealed jar</p>
                 <p className="text-sm text-[#A994A1]">
                   {fears.length > 0
                     ? `${fears.length} ${fears.length === 1 ? 'fear is' : 'fears are'} stored.`
                     : 'Empty and ready for the first folded note.'}
                 </p>
               </div>
-              <div className="rounded-full border border-white/70 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.22em] text-[#B5A4AC] shadow-sm">
+              <div className="rounded-full border border-white/70 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.22em] text-[#576154] shadow-sm">
                 calm storage
               </div>
             </div>
@@ -114,12 +114,12 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
 
             <div className="relative z-10 grid gap-3 sm:grid-cols-2">
               <div className="rounded-3xl border border-white/70 bg-white/70 p-4 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.22em] text-[#B5A4AC]">notes inside</p>
-                <p className="mt-2 text-2xl text-[#3d3244]">{fears.length}</p>
+                <p className="text-xs uppercase tracking-[0.22em] text-[#576154]">notes inside</p>
+                <p className="mt-2 text-2xl text-[#3F473D]">{fears.length}</p>
               </div>
               <div className="rounded-3xl border border-white/70 bg-white/70 p-4 shadow-sm">
-                <p className="text-xs uppercase tracking-[0.22em] text-[#B5A4AC]">latest fold</p>
-                <p className="mt-2 text-lg text-[#3d3244]">{latestFear ? formatFearDate(latestFear.createdAt) : 'None yet'}</p>
+                <p className="text-xs uppercase tracking-[0.22em] text-[#576154]">latest fold</p>
+                <p className="mt-2 text-lg text-[#3F473D]">{latestFear ? formatFearDate(latestFear.createdAt) : 'None yet'}</p>
               </div>
             </div>
           </motion.section>
@@ -132,11 +132,11 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
               transition={{ delay: 0.16, duration: 0.5 }}
             >
               <div className="mb-4 flex items-start gap-3">
-                <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-2xl bg-[#F8E4ED] text-[#D994B2]">
+                <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-2xl bg-[#F8E4ED] text-[#B85D73]">
                   <Sparkles className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 className="text-xl text-[#3d3244]">Make the worry smaller</h2>
+                  <h2 className="text-xl text-[#3F473D]">Make the worry smaller</h2>
                   <p className="mt-2 text-sm leading-relaxed text-[#A994A1]">
                     Name the fear and fold it away. The act of writing it down and sealing it in the jar
                     is often enough to loosen its grip.
@@ -150,14 +150,14 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                 <motion.button
                   key="add-button"
                   onClick={() => setIsAdding(true)}
-                  className="group w-full overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#F1C6D9] via-[#E9B7CD] to-[#D994B2] p-[1px] shadow-[0_18px_45px_rgba(217,148,178,0.32)]"
+                  className="group w-full overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#CF6F85] via-[#C8798F] to-[#B85D73] p-[1px] shadow-[0_18px_45px_rgba(217,148,178,0.32)]"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -14 }}
                   whileHover={{ scale: 1.015, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="flex items-center justify-center gap-3 rounded-[1.95rem] bg-[#F1C6D9]/55 px-7 py-5 text-white transition-colors group-hover:bg-transparent">
+                  <span className="flex items-center justify-center gap-3 rounded-[1.95rem] bg-[#CF6F85]/55 px-7 py-5 text-white transition-colors group-hover:bg-transparent">
                     <Plus className="h-5 w-5" />
                     <span className="text-lg font-medium">Add a Fear</span>
                   </span>
@@ -172,8 +172,8 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                 >
                   <div className="mb-5 flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.22em] text-[#B5A4AC]">new note</p>
-                      <h2 className="mt-1 text-xl text-[#3d3244]">Add to the jar</h2>
+                      <p className="text-xs uppercase tracking-[0.22em] text-[#576154]">new note</p>
+                      <h2 className="mt-1 text-xl text-[#3F473D]">Add to the jar</h2>
                     </div>
                     <button
                       onClick={() => {
@@ -181,26 +181,26 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                         setNewFear('');
                       }}
                       aria-label="Close new fear entry form"
-                      className="grid h-10 w-10 place-items-center rounded-full bg-[#F8E4ED] text-[#A994A1] transition-colors hover:text-[#D994B2]"
+                      className="grid h-10 w-10 place-items-center rounded-full bg-[#F8E4ED] text-[#A994A1] transition-colors hover:text-[#B85D73]"
                     >
                       <X className="h-4 w-4" />
                     </button>
                   </div>
 
                   <label className="block space-y-2">
-                    <span className="text-sm font-medium text-[#3d3244]">What fear is asking for attention?</span>
+                    <span className="text-sm font-medium text-[#3F473D]">What fear is asking for attention?</span>
                     <textarea
                       value={newFear}
                       onChange={(event) => setNewFear(event.target.value)}
                       placeholder="Example: I am afraid I will fail my exam."
-                      className="h-32 w-full resize-none rounded-3xl border border-[#F1C6D9]/45 bg-white px-5 py-4 text-[#3d3244] outline-none transition-colors placeholder:text-[#B5A4AC]/55 focus:border-[#D994B2]"
+                      className="h-32 w-full resize-none rounded-3xl border border-[#CF6F85]/45 bg-white px-5 py-4 text-[#3F473D] outline-none transition-colors placeholder:text-[#576154]/55 focus:border-[#B85D73]"
                       autoFocus
                     />
                   </label>
 
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                     <motion.button
-                      className="flex-1 rounded-full bg-[#EEF8EE] px-7 py-3 text-[#3d3244] transition-colors hover:bg-[#DFF1DC]"
+                      className="flex-1 rounded-full bg-[#576154] px-7 py-3 text-white transition-colors hover:bg-[#434B41]"
                       onClick={() => {
                         setIsAdding(false);
                         setNewFear('');
@@ -213,8 +213,8 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                     <motion.button
                       className={`flex-1 rounded-full px-7 py-3 transition-all ${
                         canSubmit
-                          ? 'bg-[#D994B2] text-white shadow-[0_12px_26px_rgba(217,148,178,0.28)] hover:bg-[#C783A2]'
-                          : 'cursor-not-allowed bg-[#EEF8EE] text-[#B5A4AC]'
+                          ? 'bg-[#CF6F85] text-white shadow-[0_12px_26px_rgba(207,111,133,0.28)] hover:bg-[#B85D73]'
+                          : 'cursor-not-allowed bg-[#E8C9D0] text-[#9F5B6C]'
                       }`}
                       onClick={handleSubmit}
                       disabled={!canSubmit}
@@ -231,7 +231,7 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
             {fears.length > 0 ? (
               <motion.button
                 onClick={() => setShowList((value) => !value)}
-                className="w-full rounded-[2rem] border border-white/75 bg-white/75 px-6 py-4 text-[#3d3244] shadow-sm backdrop-blur-md transition-colors hover:bg-white"
+                className="w-full rounded-[2rem] border border-white/75 bg-white/75 px-6 py-4 text-[#3F473D] shadow-sm backdrop-blur-md transition-colors hover:bg-white"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.26, duration: 0.4 }}
@@ -239,7 +239,7 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                 whileTap={{ scale: 0.98 }}
               >
                 <span className="flex items-center justify-center gap-3">
-                  <Eye className="h-5 w-5 text-[#D994B2]" />
+                  <Eye className="h-5 w-5 text-[#B85D73]" />
                   <span>{showList ? 'Hide notes' : `View notes in jar (${fears.length})`}</span>
                 </span>
               </motion.button>
@@ -269,8 +269,8 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
             >
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.22em] text-[#B5A4AC]">inside the jar</p>
-                  <h2 className="mt-1 text-2xl text-[#3d3244]">
+                  <p className="text-xs uppercase tracking-[0.22em] text-[#576154]">inside the jar</p>
+                  <h2 className="mt-1 text-2xl text-[#3F473D]">
                     {fears.length} saved {fears.length === 1 ? 'note' : 'notes'}
                   </h2>
                 </div>
@@ -293,13 +293,13 @@ export default function FearJar({ fears, onAddFear, onRemoveFear, onBack }: Fear
                           onClick={() => setExpandedFear(isExpanded ? null : fear.id)}
                           className="min-w-0 flex-1 text-left"
                         >
-                          <p className="text-sm text-[#B5A4AC]">{formatFearDate(fear.createdAt)}</p>
-                          <p className="mt-2 font-medium leading-relaxed text-[#3d3244]">{fear.fear}</p>
+                          <p className="text-sm text-[#576154]">{formatFearDate(fear.createdAt)}</p>
+                          <p className="mt-2 font-medium leading-relaxed text-[#3F473D]">{fear.fear}</p>
                         </button>
                         <button
                           onClick={() => onRemoveFear(fear.id)}
                           aria-label={`Remove fear: ${fear.fear}`}
-                          className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-[#F8E4ED] text-[#A994A1] transition-colors hover:text-[#D994B2]"
+                          className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-[#F8E4ED] text-[#A994A1] transition-colors hover:text-[#B85D73]"
                         >
                           <X className="h-4 w-4" />
                         </button>

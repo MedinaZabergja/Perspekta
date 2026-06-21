@@ -8,7 +8,7 @@ interface SaveProgressBannerProps {
 export default function SaveProgressBanner({ onSignIn }: SaveProgressBannerProps) {
   return (
     <motion.div
-      className="sticky top-0 z-30 border-b border-white/20 bg-gradient-to-r from-[#F1C6D9]/95 to-[#e5b0c7]/95 px-4 py-3 text-white shadow-lg backdrop-blur-md sm:px-6"
+      className="sticky top-0 z-30 border-b border-white/20 bg-gradient-to-r from-[#CF6F85]/95 to-[#B85D73]/95 px-4 py-3 text-white shadow-lg backdrop-blur-md sm:px-6"
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20 }}

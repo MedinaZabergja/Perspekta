@@ -23,41 +23,41 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <h1 className="text-4xl text-[#3d3244]">Welcome to Perspekta</h1>
-            <p className="text-lg text-[#B5A4AC] max-w-xl mx-auto">
+            <h1 className="text-4xl text-[#3F473D]">Welcome to Perspekta</h1>
+            <p className="text-lg text-[#576154] max-w-xl mx-auto">
               A gentle space for cognitive reflection and reframing difficult thoughts
             </p>
           </motion.div>
 
           <motion.div
-            className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 space-y-6 border border-[#F1C6D9]/20 shadow-sm"
+            className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 space-y-6 border border-[#CF6F85]/20 shadow-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <h2 className="text-xl text-[#3d3244]">How Perspekta Works</h2>
-            <ul className="space-y-4 text-[#3d3244]">
+            <h2 className="text-xl text-[#3F473D]">How Perspekta Works</h2>
+            <ul className="space-y-4 text-[#3F473D]">
               <li className="flex gap-3">
-                <span className="text-[#F1C6D9] flex-shrink-0">✦</span>
+                <span className="text-[#CF6F85] flex-shrink-0">✦</span>
                 <span>Share a distressing thought in a safe, private space</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-[#F1C6D9] flex-shrink-0">✦</span>
+                <span className="text-[#CF6F85] flex-shrink-0">✦</span>
                 <span>Explore evidence and alternative perspectives using CBT-inspired techniques</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-[#F1C6D9] flex-shrink-0">✦</span>
+                <span className="text-[#CF6F85] flex-shrink-0">✦</span>
                 <span>Build a more balanced view of the situation</span>
               </li>
               <li className="flex gap-3">
-                <span className="text-[#F1C6D9] flex-shrink-0">✦</span>
+                <span className="text-[#CF6F85] flex-shrink-0">✦</span>
                 <span>Step away and engage with real-world activities</span>
               </li>
             </ul>
 
-            <div className="pt-6 border-t border-[#F1C6D9]/20 space-y-4">
-              <h3 className="font-medium text-[#3d3244]">Important Safety Information</h3>
-              <div className="text-sm text-[#B5A4AC] space-y-3 bg-[#ffffff] rounded-2xl p-6">
+            <div className="pt-6 border-t border-[#CF6F85]/20 space-y-4">
+              <h3 className="font-medium text-[#3F473D]">Important Safety Information</h3>
+              <div className="text-sm text-[#576154] space-y-3 bg-[#ffffff] rounded-2xl p-6">
                 <p>
                   Perspekta is a self-reflection tool inspired by Cognitive Behavioral Therapy
                   principles. It is <strong>not a replacement</strong> for professional mental health
@@ -68,7 +68,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
                   crisis, please reach out to a trusted friend, family member, or contact a
                   professional support service immediately.
                 </p>
-                <div className="font-medium text-[#3d3244] space-y-2 pt-2">
+                <div className="font-medium text-[#3F473D] space-y-2 pt-2">
                   <p className="font-semibold">24/7 Crisis Resources:</p>
                   <ul className="space-y-1 text-sm">
                     <li>• <strong>988 Suicide & Crisis Lifeline:</strong> Call or text 988</li>
@@ -84,7 +84,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
           </motion.div>
 
           <motion.button
-            className="px-8 py-4 bg-[#F1C6D9] text-white rounded-full hover:bg-[#e5b0c7] transition-colors shadow-sm"
+            className="px-8 py-4 bg-[#CF6F85] text-white rounded-full hover:bg-[#B85D73] transition-colors shadow-sm"
             onClick={onComplete}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

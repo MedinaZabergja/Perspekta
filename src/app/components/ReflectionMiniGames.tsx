@@ -34,21 +34,21 @@ export default function ReflectionMiniGames() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="rounded-2xl border border-[#AED7D3]/50 bg-[#e8f7f5]/45 p-5 space-y-4">
+    <section className="rounded-2xl border border-[#C4DEDF]/50 bg-[#DDEBEC]/45 p-5 space-y-4">
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full rounded-2xl border border-[#AED7D3]/70 bg-white/80 px-4 py-3 text-left transition-colors hover:bg-white"
+        className="w-full rounded-2xl border border-[#C4DEDF]/70 bg-white/80 px-4 py-3 text-left transition-colors hover:bg-white"
         aria-expanded={isOpen}
       >
         <div className="flex items-center justify-between gap-3">
           <div>
-            <h2 className="text-xl text-[#3d3244]">Mini Game Break Zone</h2>
-            <p className="text-sm text-[#B5A4AC]">
+            <h2 className="text-xl text-[#3F473D]">Mini Game Break Zone</h2>
+            <p className="text-sm text-[#576154]">
               Click to {isOpen ? 'hide' : 'open'} 3 calming mini games.
             </p>
           </div>
           <ChevronDown
-            className={`w-5 h-5 text-[#B5A4AC] transition-transform ${isOpen ? 'rotate-180' : ''}`}
+            className={`w-5 h-5 text-[#576154] transition-transform ${isOpen ? 'rotate-180' : ''}`}
           />
         </div>
       </button>
@@ -66,8 +66,8 @@ export default function ReflectionMiniGames() {
                   onClick={() => setSelectedGame(gameId)}
                   className={`rounded-2xl border px-4 py-4 text-left transition-colors ${
                     selected
-                      ? 'border-[#F1C6D9] bg-white text-[#3d3244]'
-                      : 'border-[#AED7D3]/60 bg-white/70 text-[#B5A4AC] hover:bg-white'
+                      ? 'border-[#CF6F85] bg-white text-[#3F473D]'
+                      : 'border-[#C4DEDF]/60 bg-white/70 text-[#576154] hover:bg-white'
                   }`}
                 >
                   <p className="text-base font-medium">
@@ -79,14 +79,14 @@ export default function ReflectionMiniGames() {
             })}
           </div>
 
-          <div className="rounded-2xl bg-white p-4 border border-[#F1C6D9]/25">
+          <div className="rounded-2xl bg-white p-4 border border-[#CF6F85]/25">
             {selectedGame === 'stack' && <StackDropGame isActive={isOpen} />}
             {selectedGame === 'match' && <ColorMatchGame />}
             {selectedGame === 'merge' && <TileMergeGame />}
           </div>
 
-          <p className="text-xs text-[#B5A4AC] leading-relaxed">
-            Why this game: <span className="text-[#3d3244]">{GAME_DETAILS[selectedGame].why}</span>
+          <p className="text-xs text-[#576154] leading-relaxed">
+            Why this game: <span className="text-[#3F473D]">{GAME_DETAILS[selectedGame].why}</span>
           </p>
         </>
       )}
@@ -125,7 +125,7 @@ const STACK_SHAPES: number[][][] = [
     [0, 1, 1],
   ],
 ];
-const STACK_COLORS = ['#F1C6D9', '#AED7D3', '#C3D162', '#9EC5FE', '#FFC78A', '#C5B3FF', '#FF9E9E'];
+const STACK_COLORS = ['#CF6F85', '#C4DEDF', '#959863', '#576154', '#F0E2DF', '#B85D73', '#E8C9D0'];
 type StackCell = string | null;
 interface StackPiece {
   shape: number[][];
@@ -406,8 +406,8 @@ function StackDropGame({ isActive }: { isActive: boolean }) {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between text-sm">
-        <p className="text-[#3d3244]">Score: {state.score}</p>
-        <p className="text-[#B5A4AC]">Lines: {state.lines}</p>
+        <p className="text-[#3F473D]">Score: {state.score}</p>
+        <p className="text-[#576154]">Lines: {state.lines}</p>
       </div>
 
       <div
@@ -434,7 +434,7 @@ function StackDropGame({ isActive }: { isActive: boolean }) {
             initial={{ opacity: 0, y: 8, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8 }}
-            className="text-center text-sm text-[#F1C6D9]"
+            className="text-center text-sm text-[#CF6F85]"
           >
             ✨ Line clear!
           </motion.p>
@@ -444,28 +444,28 @@ function StackDropGame({ isActive }: { isActive: boolean }) {
       <div className="grid grid-cols-4 gap-2">
         <button
           onClick={() => moveHorizontal(-1)}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move piece left"
         >
           <MoveLeft className="w-4 h-4" />
         </button>
         <button
           onClick={rotate}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Rotate piece"
         >
           <RotateCw className="w-4 h-4" />
         </button>
         <button
           onClick={softDrop}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move piece down"
         >
           <ArrowDown className="w-4 h-4" />
         </button>
         <button
           onClick={() => moveHorizontal(1)}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move piece right"
         >
           <MoveRight className="w-4 h-4" />
@@ -474,14 +474,14 @@ function StackDropGame({ isActive }: { isActive: boolean }) {
 
       <button
         onClick={restart}
-        className="w-full rounded-xl bg-[#F1C6D9] px-4 py-2 text-white hover:bg-[#e5b0c7] transition-colors flex items-center justify-center gap-2"
+        className="w-full rounded-xl bg-[#CF6F85] px-4 py-2 text-white hover:bg-[#B85D73] transition-colors flex items-center justify-center gap-2"
       >
         <RefreshCw className="w-4 h-4" />
         Restart
       </button>
 
       {state.gameOver && (
-        <p className="text-center text-sm text-[#B5A4AC]">Game over. Reset whenever you want another round.</p>
+        <p className="text-center text-sm text-[#576154]">Game over. Reset whenever you want another round.</p>
       )}
     </div>
   );
@@ -490,12 +490,12 @@ function StackDropGame({ isActive }: { isActive: boolean }) {
 const MATCH_ROWS = 7;
 const MATCH_COLS = 7;
 const CANDIES = [
-  { emoji: '🍓', color: '#fda4af' },
-  { emoji: '🍋', color: '#fde68a' },
-  { emoji: '🫐', color: '#bfdbfe' },
-  { emoji: '🍇', color: '#ddd6fe' },
-  { emoji: '🍏', color: '#bbf7d0' },
-  { emoji: '🍊', color: '#fdba74' },
+  { emoji: '🍓', color: '#CF6F85' },
+  { emoji: '🍋', color: '#959863' },
+  { emoji: '🫐', color: '#C4DEDF' },
+  { emoji: '🍇', color: '#576154' },
+  { emoji: '🍏', color: '#AEB181' },
+  { emoji: '🍊', color: '#DFA0B0' },
 ];
 type MatchGrid = number[][];
 type MatchFallMap = number[][];
@@ -754,8 +754,8 @@ function ColorMatchGame() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between text-sm">
-        <p className="text-[#3d3244]">Score: {state.score}</p>
-        <p className="text-[#B5A4AC]">Moves: {state.moves}</p>
+        <p className="text-[#3F473D]">Score: {state.score}</p>
+        <p className="text-[#576154]">Moves: {state.moves}</p>
       </div>
 
       <div className="relative h-5">
@@ -766,7 +766,7 @@ function ColorMatchGame() {
               initial={{ opacity: 0, y: 8, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8 }}
-              className="absolute inset-0 text-center text-sm text-[#F1C6D9]"
+              className="absolute inset-0 text-center text-sm text-[#CF6F85]"
             >
               ✨ Sweet success!
             </motion.p>
@@ -818,13 +818,13 @@ function ColorMatchGame() {
 
       <button
         onClick={restart}
-        className="w-full rounded-xl bg-[#F1C6D9] px-4 py-2 text-white hover:bg-[#e5b0c7] transition-colors flex items-center justify-center gap-2"
+        className="w-full rounded-xl bg-[#CF6F85] px-4 py-2 text-white hover:bg-[#B85D73] transition-colors flex items-center justify-center gap-2"
       >
         <RefreshCw className="w-4 h-4" />
         Restart
       </button>
 
-      <p className="text-center text-sm text-[#B5A4AC] min-h-5">{state.feedback}</p>
+      <p className="text-center text-sm text-[#576154] min-h-5">{state.feedback}</p>
     </div>
   );
 }
@@ -956,21 +956,21 @@ const hasAvailableMoves = (board: TileBoard): boolean => {
 };
 
 const TILE_STYLES: Record<number, { bg: string; text: string }> = {
-  2: { bg: '#fef3f2', text: '#5f4a50' },
-  4: { bg: '#fde9d4', text: '#5f4a50' },
-  8: { bg: '#fcd5ce', text: '#5f4a50' },
-  16: { bg: '#bbf7d0', text: '#3d3244' },
-  32: { bg: '#bfdbfe', text: '#3d3244' },
-  64: { bg: '#ddd6fe', text: '#3d3244' },
-  128: { bg: '#f9a8d4', text: '#3d3244' },
-  256: { bg: '#fda4af', text: '#3d3244' },
-  512: { bg: '#fb7185', text: 'white' },
-  1024: { bg: '#f43f5e', text: 'white' },
-  2048: { bg: '#e11d48', text: 'white' },
+  2: { bg: '#F0E2DF', text: '#3F473D' },
+  4: { bg: '#E8C9D0', text: '#3F473D' },
+  8: { bg: '#C4DEDF', text: '#3F473D' },
+  16: { bg: '#DDEBEC', text: '#3F473D' },
+  32: { bg: '#C9CBA4', text: '#3F473D' },
+  64: { bg: '#959863', text: 'white' },
+  128: { bg: '#CF6F85', text: 'white' },
+  256: { bg: '#B85D73', text: 'white' },
+  512: { bg: '#576154', text: 'white' },
+  1024: { bg: '#434B41', text: 'white' },
+  2048: { bg: '#3F473D', text: 'white' },
 };
 
 const tileStyle = (value: number): { bg: string; text: string } =>
-  TILE_STYLES[value] ?? { bg: '#be123c', text: 'white' };
+  TILE_STYLES[value] ?? { bg: '#3F473D', text: 'white' };
 
 const getSlideOffset = (direction: MoveDirection | null): { x: number; y: number } => {
   if (direction === 'left') return { x: 16, y: 0 };
@@ -1068,8 +1068,8 @@ function TileMergeGame() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between text-sm">
-        <p className="text-[#3d3244]">Score: {state.score}</p>
-        <p className="text-[#B5A4AC]">Best: {state.best}</p>
+        <p className="text-[#3F473D]">Score: {state.score}</p>
+        <p className="text-[#576154]">Best: {state.best}</p>
       </div>
 
       <div className="relative h-5">
@@ -1080,7 +1080,7 @@ function TileMergeGame() {
               initial={{ opacity: 0, y: 8, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8 }}
-              className="absolute inset-0 text-center text-sm text-[#F1C6D9]"
+              className="absolute inset-0 text-center text-sm text-[#CF6F85]"
             >
               ✨ Merge success!
             </motion.p>
@@ -1118,7 +1118,7 @@ function TileMergeGame() {
         <div />
         <button
           onClick={() => handleMove('up')}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move tiles up"
         >
           <ArrowUp className="w-4 h-4" />
@@ -1126,21 +1126,21 @@ function TileMergeGame() {
         <div />
         <button
           onClick={() => handleMove('left')}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move tiles left"
         >
           <MoveLeft className="w-4 h-4" />
         </button>
         <button
           onClick={() => handleMove('down')}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move tiles down"
         >
           <ArrowDown className="w-4 h-4" />
         </button>
         <button
           onClick={() => handleMove('right')}
-          className="rounded-xl bg-[#e8f7f5] px-3 py-2 text-[#3d3244] hover:bg-[#AED7D3] transition-colors flex items-center justify-center"
+          className="rounded-xl bg-[#DDEBEC] px-3 py-2 text-[#3F473D] hover:bg-[#C4DEDF] transition-colors flex items-center justify-center"
           aria-label="Move tiles right"
         >
           <MoveRight className="w-4 h-4" />
@@ -1149,13 +1149,13 @@ function TileMergeGame() {
 
       <button
         onClick={restart}
-        className="w-full rounded-xl bg-[#F1C6D9] px-4 py-2 text-white hover:bg-[#e5b0c7] transition-colors flex items-center justify-center gap-2"
+        className="w-full rounded-xl bg-[#CF6F85] px-4 py-2 text-white hover:bg-[#B85D73] transition-colors flex items-center justify-center gap-2"
       >
         <RefreshCw className="w-4 h-4" />
         Restart
       </button>
 
-      <p className="text-center text-sm text-[#B5A4AC] min-h-5">{state.message}</p>
+      <p className="text-center text-sm text-[#576154] min-h-5">{state.message}</p>
     </div>
   );
 }
