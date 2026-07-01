@@ -1,27 +1,35 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-
-dotenv.config({ path: '.env.local' });
-
-const app = express();
-const PORT = 3001;
-
-app.use(cors());
-app.use(express.json());
-
 const FREE_MODELS = [
   'google/gemma-4-31b-it:free',
   'meta-llama/llama-3.3-70b-instruct:free',
   'deepseek/deepseek-v4-flash:free',
 ];
 
-app.get('/api/ai-reflection', (_req, res) => {
-  res.json({ message: 'Perspekta AI reflection server is running with OpenRouter' });
-});
+export default async function handler(req: any, res: any) {
+  if (req.method === 'GET') {
+    return res.status(200).json({
+      message: 'Perspekta AI reflection server is running with OpenRouter',
+    });
+  }
 
-app.post('/api/ai-reflection', async (req, res) => {
-  const { thought, evidence = [], balancedPerspective } = req.body;
+  if (req.method !== 'POST') {
+    return res.status(405).json({
+      error: 'Method not allowed',
+    });
+  }
+
+  let body = req.body;
+
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      return res.status(400).json({
+        error: 'Invalid JSON body',
+      });
+    }
+  }
+
+  const { thought, evidence = [], balancedPerspective } = body || {};
 
   console.log('AI request received:', {
     thought,
@@ -32,7 +40,7 @@ app.post('/api/ai-reflection', async (req, res) => {
 
   if (!process.env.OPENROUTER_API_KEY) {
     return res.status(500).json({
-      error: 'Missing OPENROUTER_API_KEY in .env.local',
+      error: 'Missing OPENROUTER_API_KEY',
     });
   }
 
@@ -57,7 +65,7 @@ User's difficult thought:
 "${thought}"
 
 Evidence the user provided:
-${evidence.join(', ') || 'their own observations'}
+${Array.isArray(evidence) && evidence.length > 0 ? evidence.join(', ') : 'their own observations'}
 
 Their balanced perspective:
 "${balancedPerspective}"
@@ -103,12 +111,16 @@ Return only the final reflection. Do not include labels, markdown, notes, explan
     try {
       console.log(`Trying model: ${model}`);
 
+      const referer = process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : 'http://localhost:5173';
+
       const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
           'Content-Type': 'application/json',
-          'HTTP-Referer': 'http://localhost:5173',
+          'HTTP-Referer': referer,
           'X-Title': 'Perspekta',
         },
         body: JSON.stringify({
@@ -179,7 +191,7 @@ Return only the final reflection. Do not include labels, markdown, notes, explan
 
       console.log('Formatted reflection:', formattedReflection);
 
-      return res.json({
+      return res.status(200).json({
         aiReflection: formattedReflection,
         modelUsed: model,
       });
@@ -198,12 +210,12 @@ Return only the final reflection. Do not include labels, markdown, notes, explan
     balancedPerspective
   ).join(' ');
 
-  return res.json({
+  return res.status(200).json({
     aiReflection: fallbackReflection,
     modelUsed: 'fallback',
     warning: 'AI models unavailable or returned corrupted output. Using generated reflection.',
   });
-});
+}
 
 function cleanAIText(text: string): string {
   return text
@@ -280,8 +292,11 @@ function generateSmartFallbacks(
   balancedPerspective: string
 ): string[] {
   const thoughtLower = thought.toLowerCase();
+
   const evidenceText =
-    evidence.length > 0 ? evidence.join(', ') : balancedPerspective;
+    Array.isArray(evidence) && evidence.length > 0
+      ? evidence.join(', ')
+      : balancedPerspective;
 
   const isNotGoodEnough =
     thoughtLower.includes('not good enough') || thoughtLower.includes('not enough');
@@ -373,7 +388,3 @@ function generateSmartFallbacks(
     'Today, take one small action that matches the balanced perspective you already wrote.',
   ];
 }
-
-app.listen(PORT, () => {
-  console.log(`Perspekta AI server running on http://localhost:${PORT}`);
-});
